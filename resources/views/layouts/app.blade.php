@@ -29,10 +29,17 @@
     </div>
 
     <!-- Login and sign up -->
-    <div class="w-1/3 flex gap-4">
-        <button onclick="openLogin()" class="px-4 py-2 bg-orange-500 text-white rounded cursor-pointer">Login</button>
-        <button onclick="openSignup()" class="px-4 py-2 border border-orange-500 text-orange-500 rounded cursor-pointer">Sign Up</button>
+    <div class="w-1/3 flex justify-end gap-4 ">
+        <a href="{{ route('login') }}" class="px-4 py-2 bg-orange-500 text-white rounded cursor-pointer hover:bg-orange-600 transition">Login</a>
+        <a href="{{ route('register') }}" class="px-4 py-2 border border-orange-500 text-orange-500 rounded cursor-pointer hover:bg-orange-600 hover:text-white transition">Sign Up</a>
+        <!-- Cart -->
+        <a href="#" class="relative text-gray-700 hover:text-gray-900 mt-3 ml-4">
+            <i class="fas fa-shopping-cart text-2xl text-orange-500 "></i>
+            <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">3</span>
+        </a>
     </div>
+     
+
 </div>
 </div>
     <div>

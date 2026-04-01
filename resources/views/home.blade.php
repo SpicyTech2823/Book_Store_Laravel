@@ -16,12 +16,12 @@
             Thousands of novels, bestsellers, and hidden gems. Curated just for you.
           </p>
           <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <button class="hero-btn bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
+            <a href="{{route('shop')}}" class="hero-btn bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
               <i class="fas fa-book-open"></i> Shop Now
-            </button>
-            <button class="border-2 border-orange-300 hover:border-orange-500 bg-white text-gray-800 px-8 py-3 rounded-full font-semibold transition flex items-center justify-center gap-2">
+            </a>
+            <a href="{{ route('contact') }}" class="border-2 border-orange-300 hover:border-orange-500 bg-white text-gray-800 px-8 py-3 rounded-full font-semibold transition flex items-center justify-center gap-2" >
               <i class="fa-solid fa-globe"></i> Connect with us
-            </button>
+            </a>
           </div>
           <!-- mini stats -->
           <div class="flex flex-wrap gap-6 justify-center md:justify-start mt-10 ">
@@ -51,68 +51,22 @@
       <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mt-2">Featured Bestsellers</h2>
       <p class="text-gray-500 max-w-2xl mx-auto mt-3">Curated masterpieces — loved by readers worldwide</p>
     </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      <!-- Book Card 1 -->
-      <div class="book-card bg-white rounded-2xl shadow-md overflow-hidden transition-all border border-gray-100">
-        <div class="relative h-72 bg-gradient-to-br from-indigo-100 to-amber-50 flex items-center justify-center">
-          <img src="{{ asset('images/atomic_habits.jpg') }}" alt="Book cover" class="h-64 w-auto object-contain drop-shadow-xl">
-          <span class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-md">#1 Bestseller</span>
-        </div>
-        <div class="p-5">
-          <div class="flex items-center text-yellow-400 text-sm mb-1">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-            <span class="text-gray-500 text-xs ml-1">(4.8)</span>
-          </div>
-          <h3 class="font-bold text-gray-800 text-lg">Atomic Habits</h3>
-          <p class="text-gray-500 text-sm">James Clear</p>
-          <div class="flex items-center justify-between mt-3">
-            <span class="font-bold text-orange-600 text-xl">$14.99</span>
-            <button class="bg-gray-100 hover:bg-orange-600 hover:text-white text-gray-700 p-2 rounded-full transition"><i class="fas fa-cart-plus"></i></button>
-          </div>
-        </div>
-      </div>
-      <!-- Book Card 2 -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @foreach($books as $book)
       <div class="book-card bg-white rounded-2xl shadow-md overflow-hidden transition-all border border-gray-100">
         <div class="relative h-72 bg-gradient-to-br from-rose-100 to-yellow-50 flex items-center justify-center">
-          <img src="{{ asset('images/atomic_habits.jpg') }}" alt="Book cover" class="h-64 w-auto object-contain drop-shadow-xl">
+          <img src="{{ asset($book->cover_image) }}" alt="Book cover" class="h-64 w-auto object-contain drop-shadow-xl">
         </div>
         <div class="p-5">
           <div class="flex items-center text-yellow-400 text-sm mb-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-gray-500 text-xs ml-1">(5.0)</span></div>
-          <h3 class="font-bold text-gray-800 text-lg">The Atlas Six</h3>
-          <p class="text-gray-500 text-sm">Olivie Blake</p>
-          <div class="flex items-center justify-between mt-3"><span class="font-bold text-orange-600 text-xl">$17.49</span><button class="bg-gray-100 hover:bg-orange-600 hover:text-white p-2 rounded-full transition"><i class="fas fa-cart-plus"></i></button></div>
+          <h3 class="font-bold text-gray-800 text-lg">{{ $book->title }}</h3>
+          <p class="text-gray-500 text-sm">{{$book->author }}</p>
+          <div class="flex items-center justify-between mt-3"><span class="font-bold text-orange-600 text-xl">${{ number_format($book->price, 2) }}</span><button class="bg-gray-100 hover:bg-orange-600 hover:text-white p-2 rounded-full transition"><i class="fas fa-cart-plus"></i></button></div>
         </div>
       </div>
-      <!-- Book Card 3 -->
-      <div class="book-card bg-white rounded-2xl shadow-md overflow-hidden transition-all border border-gray-100">
-        <div class="relative h-72 bg-gradient-to-br from-emerald-50 to-teal-100 flex items-center justify-center">
-          <img src="{{ asset('images/atomic_habits.jpg') }}" alt="Book cover" class="h-64 w-auto object-contain drop-shadow-xl">
-          <span class="absolute top-3 left-3 bg-amber-600 text-white text-xs font-bold px-2 py-1 rounded-md">Classic</span>
-        </div>
-        <div class="p-5">
-          <div class="flex items-center text-yellow-400 text-sm mb-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="text-gray-500 text-xs ml-1">(4.7)</span></div>
-          <h3 class="font-bold text-gray-800 text-lg">Dune Messiah</h3>
-          <p class="text-gray-500 text-sm">Frank Herbert</p>
-          <div class="flex items-center justify-between mt-3"><span class="font-bold text-orange-600 text-xl">$15.99</span><button class="bg-gray-100 hover:bg-orange-600 hover:text-white p-2 rounded-full transition"><i class="fas fa-cart-plus"></i></button></div>
-        </div>
-      </div>
-      <!-- Book Card 4 -->
-      <div class="book-card bg-white rounded-2xl shadow-md overflow-hidden transition-all border border-gray-100">
-        <div class="relative h-72 bg-gradient-to-br from-purple-100 to-pink-50 flex items-center justify-center">
-          <img src="{{ asset('images/atomic_habits.jpg') }}" alt="Book cover" class="h-64 w-auto object-contain drop-shadow-xl">
-        </div>
-        <div class="p-5">
-          <div class="flex items-center text-yellow-400 text-sm mb-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span class="text-gray-500 text-xs ml-1">(4.9)</span></div>
-          <h3 class="font-bold text-gray-800 text-lg">Tomorrow, and...</h3>
-          <p class="text-gray-500 text-sm">Gabrielle Zevin</p>
-          <div class="flex items-center justify-between mt-3"><span class="font-bold text-orange-600 text-xl">$16.49</span><button class="bg-gray-100 hover:bg-orange-600 hover:text-white p-2 rounded-full transition"><i class="fas fa-cart-plus"></i></button></div>
-        </div>
-      </div>
+        @endforeach
     </div>
-    <div class="text-center mt-12">
-      <a href="#" class="inline-flex items-center gap-2 text-orange-600 font-semibold border-b-2 border-orange-300 hover:border-orange-600 pb-1 transition">View all books <i class="fas fa-arrow-right text-sm"></i></a>
-    </div>
+
   </section>
 
   <!-- ========== CATEGORIES / GENRES SECTION ========== -->

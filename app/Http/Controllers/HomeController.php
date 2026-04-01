@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ShopController extends Controller
+class HomeController extends Controller
 {
     public function index()
     {
@@ -32,14 +32,7 @@ class ShopController extends Controller
                 'description' => 'A dystopian social science fiction novel and one of the most prominent anti-totalitarian works of the twentieth century. '
             ],
         ];
-        // search
-        $search = request()->input('search');
-        if ($search) {
-            $books = array_filter($books, function ($book) use ($search) {
-                return stripos($book->title, $search) !== false || stripos($book->author, $search) !== false;
-            });
-        }
-        return view('shop', ['books' => $books]);
+        return view('home', ['books' => $books]);
+
     }
 }
-
