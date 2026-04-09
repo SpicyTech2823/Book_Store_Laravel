@@ -12,6 +12,10 @@ A Laravel-based book store application.
 6. Run `php artisan migrate`
 7. Run `php artisan serve`
 
-## License
+## Setup Tailwind
+1. `npm install tailwindcss @tailwindcss/vite`
+2. Start your build process : `npm run dev`
 
-MIT
+
+
+
