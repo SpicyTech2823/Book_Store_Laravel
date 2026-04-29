@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Book;
 
 use Illuminate\Http\Request;
 
-class ShopController extends Controller
+class BookController extends Controller
 {
-    public function index()
+    public function show($id)
     {
         // Static book data
         $books = [
@@ -35,14 +36,13 @@ class ShopController extends Controller
                 'description' => 'A dystopian social science fiction novel and one of the most prominent anti-totalitarian works of the twentieth century. '
             ],
         ];
-        // search
-        $search = request()->input('search');
-        if ($search) {
-            $books = array_filter($books, function ($book) use ($search) {
-                return stripos($book->title, $search) !== false || stripos($book->author, $search) !== false;
-            });
-        }
-        return view('shop', ['books' => $books]);
+        $book = collect($books)->firstWhere('id', $id);
+        return view('books.show', compact('book'));
     }
-}
+}    
+   
+   
+
+    
+
 

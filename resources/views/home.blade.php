@@ -16,7 +16,7 @@
             Thousands of novels, bestsellers, and hidden gems. Curated just for you.
           </p>
           <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <a href="{{route('shop')}}" class="hero-btn bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
+            <a href="{{ route('shop') }}" class="hero-btn bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
               <i class="fas fa-book-open"></i> Shop Now
             </a>
             <a href="{{ route('contact') }}" class="border-2 border-orange-300 hover:border-orange-500 bg-white text-gray-800 px-8 py-3 rounded-full font-semibold transition flex items-center justify-center gap-2" >
@@ -61,7 +61,12 @@
           <div class="flex items-center text-yellow-400 text-sm mb-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-gray-500 text-xs ml-1">(5.0)</span></div>
           <h3 class="font-bold text-gray-800 text-lg">{{ $book->title }}</h3>
           <p class="text-gray-500 text-sm">{{$book->author }}</p>
-          <div class="flex items-center justify-between mt-3"><span class="font-bold text-orange-600 text-xl">${{ number_format($book->price, 2) }}</span><button class="bg-gray-100 hover:bg-orange-600 hover:text-white p-2 rounded-full transition"><i class="fas fa-cart-plus"></i></button></div>
+          
+          <div class="flex items-center justify-between mt-3"><span class="font-bold text-orange-600 text-xl">${{ number_format($book->price, 2) }}</span>
+          <a href="{{ route('books.show', $book->id) }}" class="text-orange-500 hover:text-orange-600 font-medium ">
+            View Detail
+          </a>
+          </div>
         </div>
       </div>
         @endforeach

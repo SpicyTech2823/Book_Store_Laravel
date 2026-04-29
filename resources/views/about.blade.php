@@ -134,27 +134,4 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== VALUES / WHAT WE STAND FOR ========== -->
-  <section class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-20">
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-white rounded-2xl p-6 shadow-md text-center border border-orange-50">
-        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-leaf text-orange-600 text-2xl"></i></div>
-        <h3 class="text-xl font-bold text-gray-800">Sustainability</h3>
-        <p class="text-gray-500 mt-2 text-sm">We use recycled packaging and partner with eco-conscious printers. Every order plants a tree.</p>
-      </div>
-      <div class="bg-white rounded-2xl p-6 shadow-md text-center border border-orange-50">
-        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-hand-holding-heart text-orange-600 text-2xl"></i></div>
-        <h3 class="text-xl font-bold text-gray-800">Inclusivity</h3>
-        <p class="text-gray-500 mt-2 text-sm">We celebrate diverse authors and stories from all backgrounds. Our shelves reflect the world's richness.</p>
-      </div>
-      <div class="bg-white rounded-2xl p-6 shadow-md text-center border border-orange-50">
-        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-chalkboard-user text-orange-600 text-2xl"></i></div>
-        <h3 class="text-xl font-bold text-gray-800">Literacy Advocacy</h3>
-        <p class="text-gray-500 mt-2 text-sm">5% of profits support local literacy programs and book donations to underserved schools.</p>
-      </div>
-    </div>
-  </section>
-
-
 @endsection

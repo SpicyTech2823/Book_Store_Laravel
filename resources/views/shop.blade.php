@@ -21,7 +21,12 @@
           <div class="flex items-center text-yellow-400 text-sm mb-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-gray-500 text-xs ml-1">(5.0)</span></div>
           <h3 class="font-bold text-gray-800 text-lg">{{ $book->title }}</h3>
           <p class="text-gray-500 text-sm">{{$book->author }}</p>
-          <div class="flex items-center justify-between mt-3"><span class="font-bold text-orange-600 text-xl">${{ number_format($book->price, 2) }}</span><button class="bg-gray-100 hover:bg-orange-600 hover:text-white p-2 rounded-full transition"><i class="fas fa-cart-plus"></i></button></div>
+          
+          <div class="flex items-center justify-between mt-3"><span class="font-bold text-orange-600 text-xl">${{ number_format($book->price, 2) }}</span>
+          <a href="{{ route('books.show', $book->id) }}" class="text-orange-500 hover:text-orange-600 font-medium ">
+            View Detail
+          </a>
+          </div>
         </div>
       </div>
         @endforeach
@@ -31,18 +36,8 @@
 @endsection
 @section('scripts')
 <script>
-    // Example: Add to cart functionality
-   
-    const addToCartButtons = document.querySelectorAll('.book-card button');
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            alert('Book added to cart!');
-            // Here you would typically make an AJAX request to add the book to the user's cart
-        });
-    }); 
+    // Confirm submission
 </script>    
-
-
 @endsection    
 
 
