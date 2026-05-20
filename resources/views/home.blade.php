@@ -55,7 +55,7 @@
         @foreach($books as $book)
       <div class="book-card bg-white rounded-2xl shadow-md overflow-hidden transition-all border border-gray-100">
         <div class="relative h-72 bg-gradient-to-br from-rose-100 to-yellow-50 flex items-center justify-center">
-          <img src="{{ asset($book->cover_image) }}" alt="Book cover" class="h-64 w-auto object-contain drop-shadow-xl">
+          <img src="{{ asset('storage/' . $book->cover_image) }}" alt="Book cover" class="h-64 w-auto object-contain drop-shadow-xl">
         </div>
         <div class="p-5">
           <div class="flex items-center text-yellow-400 text-sm mb-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-gray-500 text-xs ml-1">(5.0)</span></div>
