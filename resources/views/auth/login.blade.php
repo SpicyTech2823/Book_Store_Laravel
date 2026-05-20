@@ -14,15 +14,6 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                     Sign in to your account
                 </h1>
-                @if($errors->any())
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                        <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <form class="space-y-4 md:space-y-6" action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="relative">
@@ -31,8 +22,11 @@
                             <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-lg">
                                 <i class="fas fa-envelope"></i>
                             </span>
-                            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-r-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-2.5" placeholder="name@company.com" required="">
+                            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-r-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-2.5" placeholder="name@company.com" value="{{ old('email') }}" required="">
                         </div>
+                        @error('email')
+                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="relative">
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
@@ -42,6 +36,9 @@
                             </span>
                             <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-r-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-2.5" required="">
                         </div>
+                        @error('password')
+                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="flex items-start">

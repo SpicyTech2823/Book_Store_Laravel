@@ -29,14 +29,24 @@
     </div>
 
     <!-- Login and sign up -->
-    <div class="w-1/3 flex justify-end gap-4 ">
-        <a href="{{ route('login') }}" class="px-4 py-2 bg-orange-500 text-white rounded cursor-pointer hover:bg-orange-600 transition">Login</a>
-        <a href="{{ route('register') }}" class="px-4 py-2 border border-orange-500 text-orange-500 rounded cursor-pointer hover:bg-orange-600 hover:text-white transition">Sign Up</a>
+    <div class="w-1/3 flex justify-end gap-4 items-center">
+        @auth
+            <span class="text-sm font-medium text-gray-700">Welcome, {{ Auth::user()->name }}</span>
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+                @csrf
+                <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600 transition">Logout</button>
+            </form>
+        @else
+            <a href="{{ route('login') }}" class="px-4 py-2 bg-orange-500 text-white rounded cursor-pointer hover:bg-orange-600 transition">Login</a>
+            <a href="{{ route('register') }}" class="px-4 py-2 border border-orange-500 text-orange-500 rounded cursor-pointer hover:bg-orange-600 hover:text-white transition">Sign Up</a>
+        @endauth
         <!-- Cart -->
-        <a href="{{ route('cart.index') }}" class="relative text-gray-700 hover:text-gray-900 mt-3 ml-4">
-            <i class="fas fa-shopping-cart text-2xl text-orange-500 "></i>
-            <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">{{ count(session()->get('cart', [])) }}</span>
-        </a>
+        @auth
+            <a href="{{ route('cart.index') }}" class="relative text-gray-700 hover:text-gray-900 mt-3 ml-4">
+                <i class="fas fa-shopping-cart text-2xl text-orange-500 "></i>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">{{ count(session()->get('cart', [])) }}</span>
+            </a>
+        @endauth
     </div>
      
 
