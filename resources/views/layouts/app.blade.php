@@ -32,6 +32,11 @@
     <div class="w-1/3 flex justify-end gap-4 items-center">
         @auth
             <span class="text-sm font-medium text-gray-700">Welcome, {{ Auth::user()->name }}</span>
+            @if(Auth::user()->isAdmin())
+                <a href="{{ route('admin.dashboard') }}" class="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 transition flex items-center gap-2">
+                    <i class="fas fa-tachometer-alt"></i> Admin
+                </a>
+            @endif
             <form method="POST" action="{{ route('logout') }}" class="inline">
                 @csrf
                 <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600 transition">Logout</button>
