@@ -55,10 +55,10 @@
   <section class="bg-white border-y border-orange-100 py-14">
     <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-        <div><div class="text-4xl md:text-5xl font-black text-orange-600 stat-number">20k+</div><p class="text-gray-600 mt-1">Happy readers</p></div>
-        <div><div class="text-4xl md:text-5xl font-black text-orange-600 stat-number">350+</div><p class="text-gray-600 mt-1">Independent publishers</p></div>
-        <div><div class="text-4xl md:text-5xl font-black text-orange-600 stat-number">4.9⭐</div><p class="text-gray-600 mt-1">Average rating</p></div>
-        <div><div class="text-4xl md:text-5xl font-black text-orange-600 stat-number">12</div><p class="text-gray-600 mt-1">Literary awards</p></div>
+        <div><div class="text-4xl md:text-5xl font-black text-orange-600 stat-number">{{ $companyInfo['happy_readers'] ?? '20k+' }}</div><p class="text-gray-600 mt-1">Happy readers</p></div>
+        <div><div class="text-4xl md:text-5xl font-black text-orange-600 stat-number">{{ $companyInfo['publishers'] ?? '350+' }}</div><p class="text-gray-600 mt-1">Independent publishers</p></div>
+        <div><div class="text-4xl md:text-5xl font-black text-orange-600 stat-number">{{ $companyInfo['rating'] ?? '4.9' }}⭐</div><p class="text-gray-600 mt-1">Average rating</p></div>
+        <div><div class="text-4xl md:text-5xl font-black text-orange-600 stat-number">{{ $companyInfo['awards'] ?? '12' }}</div><p class="text-gray-600 mt-1">Literary awards</p></div>
       </div>
     </div>
   </section>
@@ -74,26 +74,18 @@
       <div class="hidden md:block absolute left-1/2 w-0.5 h-full bg-orange-200 transform -translate-x-1/2"></div>
       <!-- timeline items -->
       <div class="grid md:grid-cols-1 gap-8 relative w-full max-w-3xl">
+        @forelse($timelineEvents as $event)
         <div class="relative flex flex-col md:flex-row md:items-center md:justify-between">
-          <div class="md:w-5/12 text-right md:pr-8 order-2 md:order-1"><h3 class="text-xl font-bold text-gray-800">2022 · Humble Beginnings</h3><p class="text-gray-500 mt-1">Started as a tiny pop-up shop in Seattle, with 200 curated titles and a mission to celebrate indie authors.</p></div>
-          <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-orange-500 rounded-full border-4 border-white shadow-md timeline-dot hidden md:flex items-center justify-center"><i class="fas fa-seedling text-white text-sm"></i></div>
-          <div class="md:w-5/12 order-1 md:order-2 md:pl-8 mb-4 md:mb-0"><div class="bg-orange-50 p-4 rounded-xl inline-block"><i class="fas fa-store text-orange-500 text-3xl"></i></div></div>
+          <div class="md:w-5/12 text-right md:pr-8 order-2 md:order-1"><h3 class="text-xl font-bold text-gray-800">{{ $event->year }} · {{ $event->title }}</h3><p class="text-gray-500 mt-1">{{ $event->description }}</p></div>
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-orange-500 rounded-full border-4 border-white shadow-md timeline-dot hidden md:flex items-center justify-center"><i class="fas {{ $event->icon }} text-white text-sm"></i></div>
+          <div class="md:w-5/12 order-1 md:order-2 md:pl-8 mb-4 md:mb-0"><div class="bg-orange-50 p-4 rounded-xl inline-block"><i class="fas {{ $event->icon }} text-orange-500 text-3xl"></i></div></div>
         </div>
-        <div class="relative flex flex-col md:flex-row md:items-center md:justify-between mt-8">
-          <div class="md:w-5/12 text-right md:pr-8 order-2 md:order-1"><h3 class="text-xl font-bold text-gray-800">2023 · Going Digital</h3><p class="text-gray-500 mt-1">Launched our online store, reaching readers nationwide. Introduced personalized book subscription boxes.</p></div>
-          <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-orange-500 rounded-full border-4 border-white shadow-md timeline-dot hidden md:flex items-center justify-center"><i class="fas fa-laptop text-white text-sm"></i></div>
-          <div class="md:w-5/12 order-1 md:order-2 md:pl-8 mb-4 md:mb-0"><div class="bg-orange-50 p-4 rounded-xl inline-block"><i class="fas fa-rocket text-orange-500 text-3xl"></i></div></div>
-        </div>
-        <div class="relative flex flex-col md:flex-row md:items-center md:justify-between mt-8">
-          <div class="md:w-5/12 text-right md:pr-8 order-2 md:order-1"><h3 class="text-xl font-bold text-gray-800">2024 · Community First</h3><p class="text-gray-500 mt-1">Launched monthly book clubs, author events, and a reading rewards program. 10k+ members strong.</p></div>
-          <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-orange-500 rounded-full border-4 border-white shadow-md timeline-dot hidden md:flex items-center justify-center"><i class="fas fa-users text-white text-sm"></i></div>
-          <div class="md:w-5/12 order-1 md:order-2 md:pl-8 mb-4 md:mb-0"><div class="bg-orange-50 p-4 rounded-xl inline-block"><i class="fas fa-hand-peace text-orange-500 text-3xl"></i></div></div>
-        </div>
-        <div class="relative flex flex-col md:flex-row md:items-center md:justify-between mt-8">
-          <div class="md:w-5/12 text-right md:pr-8 order-2 md:order-1"><h3 class="text-xl font-bold text-gray-800">2025 & Beyond · The Future</h3><p class="text-gray-500 mt-1">Expanding our indie press program, launching a podcast, and building the world's coziest reading app.</p></div>
-          <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-orange-500 rounded-full border-4 border-white shadow-md timeline-dot hidden md:flex items-center justify-center"><i class="fas fa-chart-line text-white text-sm"></i></div>
-          <div class="md:w-5/12 order-1 md:order-2 md:pl-8 mb-4 md:mb-0"><div class="bg-orange-50 p-4 rounded-xl inline-block"><i class="fa-brands fa-d-and-d-beyond text-orange-500 text-3xl"></i></div></div>
-        </div>
+        @if(!$loop->last)
+        <div style="margin-top: 2rem;"></div>
+        @endif
+        @empty
+        <p class="text-gray-500 text-center">No timeline events available</p>
+        @endforelse
       </div>
     </div>
   </section>
@@ -107,30 +99,25 @@
         <p class="text-gray-500 max-w-2xl mx-auto mt-3">Bibliophiles, storytellers, and your reading companions.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Team member 1 -->
+        @forelse($teamMembers as $member)
         <div class="team-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 text-center p-6">
           <div class="w-32 h-32 mx-auto bg-amber-100 rounded-full flex items-center justify-center text-5xl text-orange-600 mb-4"><i class="fas fa-user-astronaut"></i></div>
-          <h3 class="text-xl font-bold text-gray-800">Sles Sakirin</h3>
-          <p class="text-orange-500 text-sm font-medium">Founder & Head Curator</p>
-          <p class="text-gray-500 text-sm mt-3 px-2">Former librarian with a passion for discovering hidden gems. Morgan believes every book deserves a reader.</p>
-          <div class="flex justify-center space-x-3 mt-4 text-gray-500"><i class="fab fa-twitter hover:text-orange-500 cursor-pointer"></i><i class="fab fa-linkedin-in hover:text-orange-500 cursor-pointer"></i></div>
+          <h3 class="text-xl font-bold text-gray-800">{{ $member->name }}</h3>
+          <p class="text-orange-500 text-sm font-medium">{{ $member->position }}</p>
+          <p class="text-gray-500 text-sm mt-3 px-2">{{ $member->description }}</p>
+          <div class="flex justify-center space-x-3 mt-4 text-gray-500">
+            @if($member->social_links)
+              @php $socials = json_decode($member->social_links, true); @endphp
+              @if(isset($socials['twitter']))<a href="{{ $socials['twitter'] }}" class="hover:text-orange-500 cursor-pointer"><i class="fab fa-twitter"></i></a>@endif
+              @if(isset($socials['linkedin']))<a href="{{ $socials['linkedin'] }}" class="hover:text-orange-500 cursor-pointer"><i class="fab fa-linkedin-in"></i></a>@endif
+              @if(isset($socials['instagram']))<a href="{{ $socials['instagram'] }}" class="hover:text-orange-500 cursor-pointer"><i class="fab fa-instagram"></i></a>@endif
+              @if(isset($socials['dribbble']))<a href="{{ $socials['dribbble'] }}" class="hover:text-orange-500 cursor-pointer"><i class="fab fa-dribbble"></i></a>@endif
+            @endif
+          </div>
         </div>
-        <!-- Team member 2 -->
-        <div class="team-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 text-center p-6">
-          <div class="w-32 h-32 mx-auto bg-amber-100 rounded-full flex items-center justify-center text-5xl text-orange-600 mb-4"><i class="fas fa-user-astronaut"></i></div>
-          <h3 class="text-xl font-bold text-gray-800">Lon Tola</h3>
-          <p class="text-orange-500 text-sm font-medium">Community Director</p>
-          <p class="text-gray-500 text-sm mt-3 px-2">Organizes book clubs, author talks, and ensures every voice is heard. Jamal brings the magic of connection.</p>
-          <div class="flex justify-center space-x-3 mt-4 text-gray-500"><i class="fab fa-twitter hover:text-orange-500 cursor-pointer"></i><i class="fab fa-instagram hover:text-orange-500 cursor-pointer"></i></div>
-        </div>
-        <!-- Team member 3 -->
-        <div class="team-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 text-center p-6">
-          <div class="w-32 h-32 mx-auto bg-amber-100 rounded-full flex items-center justify-center text-5xl text-orange-600 mb-4"><i class="fas fa-user-astronaut"></i></i></div>
-          <h3 class="text-xl font-bold text-gray-800">Sern Chiminh</h3>
-          <p class="text-orange-500 text-sm font-medium">Creative Director</p>
-          <p class="text-gray-500 text-sm mt-3 px-2">Designs the cozy aesthetic and makes our store a visual haven. Elena is also a speculative fiction writer.</p>
-          <div class="flex justify-center space-x-3 mt-4 text-gray-500"><i class="fab fa-dribbble hover:text-orange-500 cursor-pointer"></i><i class="fab fa-behance hover:text-orange-500 cursor-pointer"></i></div>
-        </div>
+        @empty
+        <p class="text-gray-500 text-center">No team members available</p>
+        @endforelse
       </div>
     </div>
   </section>

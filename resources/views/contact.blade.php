@@ -25,9 +25,9 @@
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">Get In Touch</h2>
                 <p class="text-gray-600 mt-4">Whether you have a question about an order, need book <br>recommendations,or just want to chat about your latest read, our friendly support team is ready to assist you.</br>   </p>
                 <ul class="mt-6 space-y-3 text-gray-700">
-                    <li class="flex items-start gap-4"><i class="fas fa-phone text-orange-500 mt-1"></i><span><strong>Phone:</strong> (555) 123-4567</span></li>
-                    <li class="flex items-start gap-4"><i class="fas fa-envelope text-orange-500 mt-1"></i><span><strong>Email:</strong> support@bookstore.com</span></li>
-                    <li class="flex items-start gap-4"><i class="fas fa-clock text-orange-500 mt-1"></i><span><strong>Hours:</strong> Mon-Fri 9am-6pm, Sat 10am-4pm</span></li>
+                    <li class="flex items-start gap-4"><i class="fas fa-phone text-orange-500 mt-1"></i><span><strong>Phone:</strong> {{ $companyInfo['phone'] ?? '(555) 123-4567' }}</span></li>
+                    <li class="flex items-start gap-4"><i class="fas fa-envelope text-orange-500 mt-1"></i><span><strong>Email:</strong> {{ $companyInfo['email'] ?? 'support@bookstore.com' }}</span></li>
+                    <li class="flex items-start gap-4"><i class="fas fa-clock text-orange-500 mt-1"></i><span><strong>Hours:</strong> {{ $companyInfo['support_hours'] ?? 'Mon-Fri 9am-6pm, Sat 10am-4pm' }}</span></li>
                 </ul>
                 
             </div>
@@ -99,7 +99,7 @@
         <h2 class="text-3xl font-bold text-gray-800 mt-2">Visit our cozy bookshop</h2>
         <p class="text-gray-600 mt-4">Located in the heart of Seattle's literary district, our physical store is a haven for book lovers. Come for the stories, stay for the hand-brewed coffee and friendly cats.</p>
         <ul class="mt-6 space-y-2">
-          <li class="flex items-start gap-3"><i class="fas fa-clock text-orange-500 mt-1"></i><span><strong>Store hours:</strong> Mon–Sat 10am–8pm, Sun 11am–6pm</span></li>
+          <li class="flex items-start gap-3"><i class="fas fa-clock text-orange-500 mt-1"></i><span><strong>Store hours:</strong> {{ $companyInfo['store_hours'] ?? 'Mon–Sat 10am–8pm, Sun 11am–6pm' }}</span></li>
           <li class="flex items-start gap-3"><i class="fas fa-calendar-alt text-orange-500 mt-1"></i><span><strong>Special events:</strong> Weekly storytime for kids, author signings every first Friday</span></li>
           <li class="flex items-start gap-3"><i class="fas fa-parking text-orange-500 mt-1"></i><span><strong>Parking:</strong> Free parking behind the building</span></li>
         </ul>
@@ -110,7 +110,7 @@
         <div class="w-full h-full bg-gray-200 flex items-center justify-center bg-gradient-to-br from-amber-100 to-orange-100">
           <div class="text-center p-4">
             <i class="fas fa-map-marked-alt text-5xl text-orange-600 mb-2"></i>
-            <p class="text-gray-700 font-medium">123 Storybook Lane, Seattle, WA</p>
+            <p class="text-gray-700 font-medium">{{ $companyInfo['address'] ?? '123 Storybook Lane, Seattle, WA' }}</p>
             <p class="text-sm text-gray-500 mt-1">📍 Interactive map coming soon — find us easily!</p>
           </div>
         </div>

@@ -25,9 +25,9 @@
           </div>
           <!-- mini stats -->
           <div class="flex flex-wrap gap-6 justify-center md:justify-start mt-10 ">
-            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-orange-500"></i><span class="text-sm text-gray-600">20,000+ books</span></div>
+            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-orange-500"></i><span class="text-sm text-gray-600">{{ $companyInfo['happy_readers'] ?? '20,000' }}+ books</span></div>
             <div class="flex items-center gap-2"><i class="fas fa-truck-fast text-orange-500"></i><span class="text-sm text-gray-600">Free shipping</span></div>
-            <div class="flex items-center gap-2"><i class="fas fa-headset text-orange-500"></i><span class="text-sm text-gray-600">24/7 support</span></div>
+            <div class="flex items-center gap-2"><i class="fas fa-headset text-orange-500"></i><span class="text-sm text-gray-600">{{ $companyInfo['support_hours'] ?? '24/7' }} support</span></div>
           </div>
         </div>
         <!-- Hero image with quote icon -->
@@ -82,31 +82,13 @@
         <p class="text-gray-500 mt-2">Find exactly what speaks to your soul</p>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+        @foreach($categories as $category)
         <div class="category-card bg-amber-50 rounded-2xl p-5 text-center border border-orange-100 cursor-pointer transition shadow-sm">
-          <i class="fas fa-dragon text-4xl text-orange-600 mb-3"></i>
-          <h3 class="font-bold text-gray-700">Fantasy</h3>
-          <p class="text-xs text-gray-500">126 books</p>
+          <i class="fas {{ $category->icon }} text-4xl text-orange-600 mb-3"></i>
+          <h3 class="font-bold text-gray-700">{{ $category->name }}</h3>
+          <p class="text-xs text-gray-500">{{ $category->book_count }} books</p>
         </div>
-        <div class="category-card bg-rose-50 rounded-2xl p-5 text-center border border-orange-100 cursor-pointer transition">
-          <i class="fas fa-heart text-4xl text-rose-500 mb-3"></i>
-          <h3 class="font-bold text-gray-700">Romance</h3>
-          <p class="text-xs text-gray-500">98 books</p>
-        </div>
-        <div class="category-card bg-blue-50 rounded-2xl p-5 text-center border border-orange-100 cursor-pointer transition">
-          <i class="fas fa-microchip text-4xl text-blue-600 mb-3"></i>
-          <h3 class="font-bold text-gray-700">Sci-Fi</h3>
-          <p class="text-xs text-gray-500">203 books</p>
-        </div>
-        <div class="category-card bg-emerald-50 rounded-2xl p-5 text-center border border-orange-100 cursor-pointer transition">
-          <i class="fas fa-landmark text-4xl text-emerald-700 mb-3"></i>
-          <h3 class="font-bold text-gray-700">History</h3>
-          <p class="text-xs text-gray-500">85 books</p>
-        </div>
-        <div class="category-card bg-purple-50 rounded-2xl p-5 text-center border border-orange-100 cursor-pointer transition">
-          <i class="fas fa-brain text-4xl text-purple-600 mb-3"></i>
-          <h3 class="font-bold text-gray-700">Psychology</h3>
-          <p class="text-xs text-gray-500">64 books</p>
-        </div>
+        @endforeach
       </div>
     </div>
   </section>
@@ -117,17 +99,21 @@
       <div class="order-2 md:order-1">
         <span class="text-orange-500 text-sm font-semibold"><i class="fas fa-comment-dots mr-1"></i> Book lovers circle</span>
         <h2 class="text-3xl font-bold text-gray-800 mt-2">What our readers say</h2>
+        @if($testimonials->count() > 0)
+        @foreach($testimonials as $testimonial)
         <div class="mt-6 bg-white p-6 rounded-2xl shadow-lg border-l-8 border-orange-400">
           <i class="fas fa-quote-left text-orange-300 text-3xl opacity-50 mb-2 block"></i>
-          <p class="text-gray-700 italic text-lg">"Paperbound completely transformed my reading journey. The recommendations are spot-on and delivery is blazing fast!"</p>
+          <p class="text-gray-700 italic text-lg">"{{ $testimonial->message }}"</p>
           <div class="flex items-center gap-3 mt-5">
             <div class="w-12 h-12 bg-amber-200 rounded-full flex items-center justify-center"><i class="fas fa-user-alt text-amber-700"></i></div>
-            <div><p class="font-bold text-gray-800">— Elena M.</p><div class="flex text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+            <div><p class="font-bold text-gray-800">— {{ $testimonial->name }}</p><div class="flex text-yellow-400 text-xs">@for($i = 0; $i < $testimonial->rating; $i++)<i class="fas fa-star"></i>@endfor</div></div>
           </div>
         </div>
+        @endforeach
+        @endif
         <div class="mt-6 flex gap-4 flex-wrap">
-          <div class="flex items-center gap-1 bg-white px-4 py-2 rounded-full shadow-sm"><i class="fas fa-globe text-orange-500"></i><span class="text-sm font-medium">10k+ ratings</span></div>
-          <div class="flex items-center gap-1 bg-white px-4 py-2 rounded-full shadow-sm"><i class="fas fa-trophy text-orange-500"></i><span class="text-sm font-medium">Award-winning picks</span></div>
+          <div class="flex items-center gap-1 bg-white px-4 py-2 rounded-full shadow-sm"><i class="fas fa-globe text-orange-500"></i><span class="text-sm font-medium">{{ $companyInfo['rating'] ?? '10k+' }} ratings</span></div>
+          <div class="flex items-center gap-1 bg-white px-4 py-2 rounded-full shadow-sm"><i class="fas fa-trophy text-orange-500"></i><span class="text-sm font-medium">{{ $companyInfo['awards'] ?? 'Award-winning' }} picks</span></div>
         </div>
       </div>
       <div class="order-1 md:order-2 flex justify-center">
@@ -136,6 +122,31 @@
            alt="testimonial collage" class="rounded-2xl shadow-2xl">
           <div class="absolute -top-4 -right-4 bg-white p-2 rounded-full shadow-md"><i class="fas fa-crown text-orange-400 text-xl"></i></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQs SECTION ========== -->
+  <section class="bg-white/70 py-16 border-y border-orange-100">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-800">Frequently Asked Questions</h2>
+        <p class="text-gray-500 mt-2">Everything you need to know</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        @forelse($faqs as $faq)
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+          <div class="flex items-start gap-4">
+            <i class="fas {{ $faq->icon }} text-2xl text-orange-600 mt-1"></i>
+            <div>
+              <h3 class="font-bold text-gray-800 text-lg">{{ $faq->title }}</h3>
+              <p class="text-gray-600 text-sm mt-2">{{ $faq->description }}</p>
+            </div>
+          </div>
+        </div>
+        @empty
+        <p class="text-gray-500 text-center">No FAQs available</p>
+        @endforelse
       </div>
     </div>
   </section>
