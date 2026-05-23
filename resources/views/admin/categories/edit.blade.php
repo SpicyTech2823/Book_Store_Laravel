@@ -20,11 +20,7 @@
                             @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="icon" class="form-label">Icon (optional)</label>
-                            <input type="text" class="form-control @error('icon') is-invalid @enderror" id="icon" name="icon" value="{{ $category->icon }}">
-                            @error('icon')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                        </div>
+                        @include('admin.partials.icon-picker', ['fieldName' => 'icon', 'value' => $category->icon])
 
                         <div class="mb-3">
                             <label for="description" class="form-label">Description (optional)</label>

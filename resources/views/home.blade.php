@@ -84,7 +84,9 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
         @foreach($categories as $category)
         <div class="category-card bg-amber-50 rounded-2xl p-5 text-center border border-orange-100 cursor-pointer transition shadow-sm">
-          <i class="fas {{ $category->icon }} text-4xl text-orange-600 mb-3"></i>
+          @if($category->icon)
+            <i class="fas fa-{{ $category->icon }} text-4xl text-orange-600 mb-3"></i>
+          @endif
           <h3 class="font-bold text-gray-700">{{ $category->name }}</h3>
           <p class="text-xs text-gray-500">{{ $category->book_count }} books</p>
         </div>
