@@ -101,7 +101,11 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         @forelse($teamMembers as $member)
         <div class="team-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 text-center p-6">
-          <div class="w-32 h-32 mx-auto bg-amber-100 rounded-full flex items-center justify-center text-5xl text-orange-600 mb-4"><i class="fas fa-user-astronaut"></i></div>
+          @if($member->image)
+            <img src="{{ asset('storage/' . $member->image) }}" alt="{{ $member->name }}" class="w-32 h-32 mx-auto rounded-full object-cover mb-4">
+          @else
+            <div class="w-32 h-32 mx-auto bg-amber-100 rounded-full flex items-center justify-center text-5xl text-orange-600 mb-4"><i class="fas fa-user-astronaut"></i></div>
+          @endif
           <h3 class="text-xl font-bold text-gray-800">{{ $member->name }}</h3>
           <p class="text-orange-500 text-sm font-medium">{{ $member->position }}</p>
           <p class="text-gray-500 text-sm mt-3 px-2">{{ $member->description }}</p>

@@ -10,6 +10,7 @@ class TeamMember extends Model
         'name',
         'position',
         'description',
+        'image',
         'social_links',
     ];
 }

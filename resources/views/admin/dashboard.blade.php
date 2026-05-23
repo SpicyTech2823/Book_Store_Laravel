@@ -38,23 +38,46 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ route('admin.books') }}" class="btn btn-info w-100">
+                                <i class="fas fa-book-open"></i> Manage Books
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ route('admin.categories') }}" class="btn btn-info w-100">
+                                <i class="fas fa-list"></i> Manage Categories
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ route('admin.users') }}" class="btn btn-info w-100">
+                                <i class="fas fa-users"></i> Manage Users
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ route('admin.team-members') }}" class="btn btn-info w-100">
+                                <i class="fas fa-users-gear"></i> Manage Team
+                            </a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
                         <div class="col-md-3">
-                            <a href="{{ route('admin.books.create') }}" class="btn btn-primary w-100">
+                            <a href="{{ route('admin.books.create') }}" class="btn btn-success w-100">
                                 <i class="fas fa-plus"></i> Add Book
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary w-100">
+                            <a href="{{ route('admin.categories.create') }}" class="btn btn-success w-100">
                                 <i class="fas fa-plus"></i> Add Category
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="{{ route('admin.users.create') }}" class="btn btn-primary w-100">
+                            <a href="{{ route('admin.users.create') }}" class="btn btn-success w-100">
                                 <i class="fas fa-plus"></i> Add User
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="{{ route('admin.team-members.create') }}" class="btn btn-primary w-100">
+                            <a href="{{ route('admin.team-members.create') }}" class="btn btn-success w-100">
                                 <i class="fas fa-plus"></i> Add Team Member
                             </a>
                         </div>
