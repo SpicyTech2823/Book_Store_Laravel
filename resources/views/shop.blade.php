@@ -5,10 +5,10 @@
     <div class="text-center mb-12 border-b border-gray-200 pb-6 border-dashed">
         <h2>Find Your Favourite <span class="text-orange-500">Books</span></h2>
         <!-- search -->
-        <div class="mt-4 flex items-center gap-3">
-            <input type="text" placeholder="Search for books, authors..." class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-orange-500 focus:border-orange-500">
-            <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition">Search</button>
-        </div>
+        <form method="GET" action="{{ route('shop') }}" class="mt-4 flex items-center gap-3">
+            <input type="text" name="search" placeholder="Search for books, authors..." value="{{ request('search') }}" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-orange-500 focus:border-orange-500">
+            <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition">Search</button>
+        </form>
     </div>
     <h1 class="text-3xl font-bold mb-6">Shop Our Collection</h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
