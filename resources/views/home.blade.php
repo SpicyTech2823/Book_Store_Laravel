@@ -129,27 +129,88 @@
   </section>
 
   <!-- ========== FAQs SECTION ========== -->
-  <section class="bg-white/70 py-16 border-y border-orange-100">
+  <section class="py-20 bg-gradient-to-b from-white via-orange-50/30 to-white">
     <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-800">Frequently Asked Questions</h2>
-        <p class="text-gray-500 mt-2">Everything you need to know</p>
+      <div class="text-center mb-16">
+        <span class="text-orange-500 font-semibold tracking-wide uppercase text-sm"><i class="fas fa-lightbulb mr-2"></i> Got Questions?</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mt-3">Frequently Asked Questions</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto mt-4">Find answers to common questions about our bookstore, shipping, returns, and more</p>
       </div>
-      <div class="grid md:grid-cols-2 gap-6">
-        @forelse($faqs as $faq)
-        <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
-          <div class="flex items-start gap-4">
-            <i class="fas {{ $faq->icon }} text-2xl text-orange-600 mt-1"></i>
-            <div>
-              <h3 class="font-bold text-gray-800 text-lg">{{ $faq->title }}</h3>
-              <p class="text-gray-600 text-sm mt-2">{{ $faq->description }}</p>
+
+      @if($faqs->count() > 0)
+      <div class="max-w-4xl mx-auto">
+        <div class="grid gap-4">
+          @foreach($faqs as $index => $faq)
+          <div class="group faq-item bg-white hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-gray-100 hover:border-orange-200 overflow-hidden">
+            <button type="button" class="w-full text-left p-6 md:p-8 flex items-center justify-between hover:bg-orange-50/50 transition-colors duration-200 faq-header">
+              <div class="flex-1">
+                <h3 class="font-bold text-gray-800 text-lg md:text-xl group-hover:text-orange-600 transition-colors">{{ $faq->question }}</h3>
+              </div>
+              <div class="ml-6 flex-shrink-0">
+                <div class="flex items-center justify-center w-10 h-10 rounded-full bg-orange-100 group-hover:bg-orange-200 transition-colors duration-200">
+                  <i class="fas fa-plus text-orange-600 transition-transform duration-300 faq-icon"></i>
+                </div>
+              </div>
+            </button>
+            <div class="faq-answer border-t-2 border-gray-100 bg-gradient-to-b from-orange-50/20 to-white" style="display: none; overflow: hidden;">
+              <div class="px-6 md:px-8 py-6 text-gray-600 leading-relaxed">
+                {{ $faq->answer }}
+              </div>
             </div>
           </div>
+          @endforeach
         </div>
-        @empty
-        <p class="text-gray-500 text-center">No FAQs available</p>
-        @endforelse
+
+        <!-- FAQ Stats -->
+        <div class="mt-16 grid grid-cols-3 gap-4 md:gap-8">
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-bold text-orange-600">{{ $faqs->count() }}</div>
+            <p class="text-gray-600 text-sm mt-2">Total Questions</p>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-bold text-orange-600">24/7</div>
+            <p class="text-gray-600 text-sm mt-2">Instant Answers</p>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-bold text-orange-600">100%</div>
+            <p class="text-gray-600 text-sm mt-2">Helpful</p>
+          </div>
+        </div>
       </div>
+      @else
+      <div class="max-w-2xl mx-auto text-center bg-white rounded-2xl p-12 border-2 border-dashed border-gray-200">
+        <i class="fas fa-question-circle text-5xl text-orange-300 mb-4"></i>
+        <p class="text-gray-500 text-lg">No FAQs available yet. Check back soon!</p>
+      </div>
+      @endif
     </div>
   </section>
+
+  <script>
+    document.querySelectorAll('.faq-header').forEach(button => {
+      button.addEventListener('click', () => {
+        const faqItem = button.parentElement;
+        const answer = faqItem.querySelector('.faq-answer');
+        const icon = faqItem.querySelector('.faq-icon');
+        const isOpen = answer.style.display === 'block';
+
+        // Close all other FAQs
+        document.querySelectorAll('.faq-item .faq-answer').forEach(openAnswer => {
+          if (openAnswer !== answer) {
+            openAnswer.style.display = 'none';
+            openAnswer.parentElement.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+          }
+        });
+
+        // Toggle current FAQ
+        if (isOpen) {
+          answer.style.display = 'none';
+          icon.style.transform = 'rotate(0deg)';
+        } else {
+          answer.style.display = 'block';
+          icon.style.transform = 'rotate(45deg)';
+        }
+      });
+    });
+  </script>
 @endsection

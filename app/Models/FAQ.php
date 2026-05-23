@@ -9,9 +9,7 @@ class FAQ extends Model
     protected $table = 'f_a_q_s';
 
     protected $fillable = [
-        'title',
-        'description',
-        'icon',
-        'order',
+        'question',
+        'answer',
     ];
 }
