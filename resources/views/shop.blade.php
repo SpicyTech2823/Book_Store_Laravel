@@ -18,10 +18,29 @@
           <img src="{{ asset('storage/' . $book->cover_image) }}" alt="Book cover" class="h-64 w-auto object-contain drop-shadow-xl">
         </div>
         <div class="p-5">
-          <div class="flex items-center text-yellow-400 text-sm mb-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-gray-500 text-xs ml-1">(5.0)</span></div>
+          <div class="flex items-center text-yellow-400 text-sm mb-1">
+            @php
+              $rating = $book->star_rating ?? 5;
+              $fullStars = floor($rating);
+              $hasHalfStar = ($rating - $fullStars) >= 0.5;
+            @endphp
+            @for($i = 0; $i < 5; $i++)
+              @if($i < $fullStars)
+                <i class="fas fa-star"></i>
+              @elseif($i == $fullStars && $hasHalfStar)
+                <i class="fas fa-star-half-alt"></i>
+              @else
+                <i class="far fa-star"></i>
+              @endif
+            @endfor
+            <span class="text-gray-500 text-xs ml-1">({{ number_format($rating, 1) }})</span>
+          </div>
+          @if($book->category)
+            <p class="text-orange-500 text-sm font-semibold mb-2">{{ $book->category->name }}</p>
+          @endif
           <h3 class="font-bold text-gray-800 text-lg">{{ $book->title }}</h3>
           <p class="text-gray-500 text-sm">{{$book->author }}</p>
-          
+
           <div class="flex items-center justify-between mt-3"><span class="font-bold text-orange-600 text-xl">${{ number_format($book->price, 2) }}</span>
           <a href="{{ route('books.show', $book->id) }}" class="text-orange-500 hover:text-orange-600 font-medium ">
             View Detail

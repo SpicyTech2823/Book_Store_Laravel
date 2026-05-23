@@ -46,6 +46,8 @@ class AdminController extends Controller
             'price' => 'required|numeric|min:0',
             'description' => 'required|string',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category_id' => 'nullable|exists:categories,id',
+            'star_rating' => 'nullable|numeric|min:0|max:5',
         ]);
 
         if ($request->hasFile('cover_image')) {
@@ -71,6 +73,8 @@ class AdminController extends Controller
             'price' => 'required|numeric|min:0',
             'description' => 'required|string',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category_id' => 'nullable|exists:categories,id',
+            'star_rating' => 'nullable|numeric|min:0|max:5',
         ]);
 
         if ($request->hasFile('cover_image')) {

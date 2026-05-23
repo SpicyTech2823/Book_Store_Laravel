@@ -39,6 +39,23 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="category_id" class="form-label">Category</label>
+                            <select class="form-select @error('category_id') is-invalid @enderror" id="category_id" name="category_id">
+                                <option value="">Select Category</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ $book->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="star_rating" class="form-label">Star Rating</label>
+                            <input type="number" class="form-control @error('star_rating') is-invalid @enderror" id="star_rating" name="star_rating" step="0.1" min="0" max="5" value="{{ $book->star_rating }}">
+                            @error('star_rating')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        </div>
+
+                        <div class="mb-3">
                             <label for="cover_image" class="form-label">Cover Image</label>
                             @if($book->cover_image)
                                 <div class="mb-2">

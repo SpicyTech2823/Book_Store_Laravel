@@ -18,7 +18,9 @@
                         <th>ID</th>
                         <th>Title</th>
                         <th>Author</th>
+                        <th>Category</th>
                         <th>Price</th>
+                        <th>Rating</th>
                         <th>Cover Image</th>
                         <th>Actions</th>
                     </tr>
@@ -29,7 +31,9 @@
                             <td>{{ $book->id }}</td>
                             <td>{{ $book->title }}</td>
                             <td>{{ $book->author }}</td>
+                            <td>{{ $book->category ? $book->category->name : '-' }}</td>
                             <td>${{ number_format($book->price, 2) }}</td>
+                            <td>{{ $book->star_rating ? number_format($book->star_rating, 1) : '-' }}</td>
                             <td>
                                 @if($book->cover_image)
                                     <img src="{{ asset('storage/' . $book->cover_image) }}" alt="{{ $book->title }}" style="width: 40px; height: auto;">
@@ -52,7 +56,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center text-muted">No books found</td>
+                            <td colspan="8" class="text-center text-muted">No books found</td>
                         </tr>
                     @endforelse
                 </tbody>

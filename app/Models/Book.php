@@ -12,10 +12,17 @@ class Book extends Model
         'price',
         'description',
         'cover_image',
+        'category_id',
+        'star_rating',
     ];
 
     public function carts()
     {
         return $this->hasMany(Cart::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

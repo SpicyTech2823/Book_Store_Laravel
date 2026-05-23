@@ -12,7 +12,26 @@
         <div class="w-full md:w-2/3">
             <h1 class="text-3xl font-bold mb-4">{{ $book->title }}</h1>
             <p class="text-gray-500 text-lg mb-4">by {{ $book->author }}</p>
-            <div class="flex items-center text-yellow-400 text-sm mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-gray-500 text-xs ml-1">(5.0)</span></div>
+            @php
+              $rating = $book->star_rating ?? 5;
+              $fullStars = floor($rating);
+              $hasHalfStar = ($rating - $fullStars) >= 0.5;
+            @endphp
+            <div class="flex items-center text-yellow-400 text-sm mb-4">
+              @for($i = 0; $i < 5; $i++)
+                @if($i < $fullStars)
+                  <i class="fas fa-star"></i>
+                @elseif($i == $fullStars && $hasHalfStar)
+                  <i class="fas fa-star-half-alt"></i>
+                @else
+                  <i class="far fa-star"></i>
+                @endif
+              @endfor
+              <span class="text-gray-500 text-xs ml-1">({{ number_format($rating, 1) }})</span>
+            </div>
+            @if($book->category)
+              <p class="text-orange-500 text-sm font-semibold mb-4">Category: <strong>{{ $book->category->name }}</strong></p>
+            @endif
             <p class="text-gray-700 text-lg mb-6">{{ $book->description }}</p>
             <div class="flex items-baseline gap-4">
                 <span class="font-bold text-orange-600 text-2xl">${{ number_format($book->price, 2) }}</span>
