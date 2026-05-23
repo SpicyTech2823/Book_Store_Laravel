@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         $books = Book::all();
-        $categories = Category::all();
+        $categories = Category::withCount('books')->get();
         $testimonials = Testimonial::all();
         $faqs = FAQ::all();
 

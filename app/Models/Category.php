@@ -12,4 +12,9 @@ class Category extends Model
         'description',
         'book_count',
     ];
+
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
 }

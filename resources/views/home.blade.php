@@ -106,7 +106,7 @@
             <i class="fas fa-{{ $category->icon }} text-4xl text-orange-600 mb-3"></i>
           @endif
           <h3 class="font-bold text-gray-700">{{ $category->name }}</h3>
-          <p class="text-xs text-gray-500">{{ $category->book_count }} books</p>
+          <p class="text-xs text-gray-500">{{ $category->books_count }} books</p>
         </div>
         @endforeach
       </div>
