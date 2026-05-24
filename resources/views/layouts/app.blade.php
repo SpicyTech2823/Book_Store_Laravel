@@ -13,11 +13,13 @@
     <div class="bg-gradient-to-r from-amber-50 via-orange-50 to-white text-black flex items-center justify-between p-4 shadow-md">
 
     <!-- Left Logo -->
-    <div class="w-1/3 flex items-center space-x-2">
-        <i class="fas fa-book-open text-orange-500 text-2xl"></i>
-        <span class="font-bold text-xl">
-            Paper<span class="text-orange-500">bound</span>
-        </span>
+    <div class="w-1/3 flex items-center">
+        <a href="/" class="flex items-center space-x-2">
+            <i class="fas fa-book-open text-orange-500 text-2xl"></i>
+            <span class="font-bold text-xl">
+                Paper<span class="text-orange-500">bound</span>
+            </span>
+        </a>
     </div>
 
     <!-- Center Menu -->
