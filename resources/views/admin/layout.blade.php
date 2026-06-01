@@ -204,6 +204,7 @@
 
                 <li><a href="{{ route('admin.books') }}" class="@if(request()->routeIs('admin.books*')) active @endif"><i class="fas fa-book-open"></i> Books</a></li>
                 <li><a href="{{ route('admin.categories') }}" class="@if(request()->routeIs('admin.categories*')) active @endif"><i class="fas fa-list"></i> Categories</a></li>
+                <li><a href="{{ route('admin.orders') }}" class="@if(request()->routeIs('admin.orders*')) active @endif"><i class="fas fa-shopping-cart"></i> Orders</a></li>
                 <li><a href="{{ route('admin.users') }}" class="@if(request()->routeIs('admin.users*')) active @endif"><i class="fas fa-users"></i> Users</a></li>
                 <li><a href="{{ route('admin.team-members') }}" class="@if(request()->routeIs('admin.team-members*')) active @endif"><i class="fas fa-users-gear"></i> Team Members</a></li>
                 <li><a href="{{ route('admin.testimonials') }}" class="@if(request()->routeIs('admin.testimonials*')) active @endif"><i class="fas fa-star"></i> Testimonials</a></li>

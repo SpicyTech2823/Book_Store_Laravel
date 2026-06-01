@@ -9,6 +9,8 @@ use App\Models\TeamMember;
 use App\Models\Testimonial;
 use App\Models\FAQ;
 use App\Models\CompanyInfo;
+use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -20,6 +22,9 @@ class AdminController extends Controller
             'total_categories' => Category::count(),
             'total_users' => User::count(),
             'total_admins' => User::where('is_admin', true)->count(),
+            'total_orders' => Order::count(),
+            'pending_orders' => Order::where('status', 'pending')->count(),
+            'total_revenue' => Order::sum('total_price'),
         ];
 
         return view('admin.dashboard', $stats);
@@ -347,5 +352,40 @@ class AdminController extends Controller
     {
         $faq->delete();
         return redirect()->route('admin.faqs')->with('success', 'FAQ deleted successfully');
+    }
+
+    // Orders CRUD
+    public function orders()
+    {
+        $orders = Order::with('user')->orderBy('created_at', 'desc')->get();
+        return view('admin.orders.index', compact('orders'));
+    }
+
+    public function showOrder(Order $order)
+    {
+        $order->load('items.book', 'user');
+        return view('admin.orders.show', compact('order'));
+    }
+
+    public function editOrder(Order $order)
+    {
+        return view('admin.orders.edit', compact('order'));
+    }
+
+    public function updateOrder(Request $request, Order $order)
+    {
+        $validated = $request->validate([
+            'status' => 'required|in:pending,processing,shipped,delivered,cancelled',
+            'notes' => 'nullable|string',
+        ]);
+
+        $order->update($validated);
+        return redirect()->route('admin.orders.show', $order)->with('success', 'Order updated successfully');
+    }
+
+    public function deleteOrder(Order $order)
+    {
+        $order->delete();
+        return redirect()->route('admin.orders')->with('success', 'Order deleted successfully');
     }
 }

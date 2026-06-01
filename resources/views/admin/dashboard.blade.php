@@ -31,6 +31,27 @@
     </div>
 
     <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-number">{{ $total_orders }}</div>
+                <div class="stat-label">Total Orders</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-number text-warning">{{ $pending_orders }}</div>
+                <div class="stat-label">Pending Orders</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-number text-success">${{ number_format($total_revenue, 2) }}</div>
+                <div class="stat-label">Total Revenue</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-light">
@@ -49,13 +70,13 @@
                             </a>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <a href="{{ route('admin.users') }}" class="btn btn-info w-100">
-                                <i class="fas fa-users"></i> Manage Users
+                            <a href="{{ route('admin.orders') }}" class="btn btn-info w-100">
+                                <i class="fas fa-shopping-cart"></i> Manage Orders
                             </a>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <a href="{{ route('admin.team-members') }}" class="btn btn-info w-100">
-                                <i class="fas fa-users-gear"></i> Manage Team
+                            <a href="{{ route('admin.users') }}" class="btn btn-info w-100">
+                                <i class="fas fa-users"></i> Manage Users
                             </a>
                         </div>
                     </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Order;
+use App\Models\OrderItem;
 
 class CartController extends Controller
 {
@@ -80,9 +82,33 @@ class CartController extends Controller
         return view('checkout', compact('cart'));
     }
     public function checkout(){
-        // Here you would typically handle payment processing and order creation
-        
+        $cart = session()->get('cart', []);
+
+        if (empty($cart)) {
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty');
+        }
+
+        $total = 0;
+        foreach ($cart as $item) {
+            $total += $item['price'] * $item['quantity'];
+        }
+
+        $order = Order::create([
+            'user_id' => auth()->id(),
+            'total_price' => $total,
+            'status' => 'pending',
+        ]);
+
+        foreach ($cart as $bookId => $item) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'book_id' => $bookId,
+                'quantity' => $item['quantity'],
+                'price' => $item['price'],
+            ]);
+        }
+
         session()->forget('cart');
-        return redirect()->route('home')->with('success', 'Checkout successful!');
+        return redirect()->route('home')->with('success', 'Order placed successfully! Order ID: ' . $order->id);
     }
 }

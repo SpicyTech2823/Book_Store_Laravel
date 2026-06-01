@@ -86,6 +86,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/faqs/{faq}/edit', [AdminController::class, 'editFAQ'])->name('faqs.edit');
     Route::put('/faqs/{faq}', [AdminController::class, 'updateFAQ'])->name('faqs.update');
     Route::delete('/faqs/{faq}', [AdminController::class, 'deleteFAQ'])->name('faqs.delete');
+
+    // Orders
+    Route::get('/orders', [AdminController::class, 'orders'])->name('orders');
+    Route::get('/orders/{order}', [AdminController::class, 'showOrder'])->name('orders.show');
+    Route::get('/orders/{order}/edit', [AdminController::class, 'editOrder'])->name('orders.edit');
+    Route::put('/orders/{order}', [AdminController::class, 'updateOrder'])->name('orders.update');
+    Route::delete('/orders/{order}', [AdminController::class, 'deleteOrder'])->name('orders.delete');
 });
 
 
