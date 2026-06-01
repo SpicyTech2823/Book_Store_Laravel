@@ -49,6 +49,12 @@
                 <div class="stat-label">Total Revenue</div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-number">{{ $total_timeline_events }}</div>
+                <div class="stat-label">Timeline Events</div>
+            </div>
+        </div>
     </div>
 
     <div class="row mt-4">
@@ -75,8 +81,8 @@
                             </a>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <a href="{{ route('admin.users') }}" class="btn btn-info w-100">
-                                <i class="fas fa-users"></i> Manage Users
+                            <a href="{{ route('admin.timeline-events') }}" class="btn btn-info w-100">
+                                <i class="fas fa-history"></i> Manage Timeline
                             </a>
                         </div>
                     </div>

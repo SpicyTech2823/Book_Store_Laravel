@@ -207,6 +207,7 @@
                 <li><a href="{{ route('admin.orders') }}" class="@if(request()->routeIs('admin.orders*')) active @endif"><i class="fas fa-shopping-cart"></i> Orders</a></li>
                 <li><a href="{{ route('admin.users') }}" class="@if(request()->routeIs('admin.users*')) active @endif"><i class="fas fa-users"></i> Users</a></li>
                 <li><a href="{{ route('admin.team-members') }}" class="@if(request()->routeIs('admin.team-members*')) active @endif"><i class="fas fa-users-gear"></i> Team Members</a></li>
+                <li><a href="{{ route('admin.timeline-events') }}" class="@if(request()->routeIs('admin.timeline-events*')) active @endif"><i class="fas fa-history"></i> Timeline</a></li>
                 <li><a href="{{ route('admin.testimonials') }}" class="@if(request()->routeIs('admin.testimonials*')) active @endif"><i class="fas fa-star"></i> Testimonials</a></li>
                 <li><a href="{{ route('admin.faqs') }}" class="@if(request()->routeIs('admin.faqs*')) active @endif"><i class="fas fa-question-circle"></i> FAQs</a></li>
 

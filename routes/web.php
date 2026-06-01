@@ -93,6 +93,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/orders/{order}/edit', [AdminController::class, 'editOrder'])->name('orders.edit');
     Route::put('/orders/{order}', [AdminController::class, 'updateOrder'])->name('orders.update');
     Route::delete('/orders/{order}', [AdminController::class, 'deleteOrder'])->name('orders.delete');
+
+    // Timeline Events
+    Route::get('/timeline-events', [AdminController::class, 'timelineEvents'])->name('timeline-events');
+    Route::get('/timeline-events/create', [AdminController::class, 'createTimelineEvent'])->name('timeline-events.create');
+    Route::post('/timeline-events', [AdminController::class, 'storeTimelineEvent'])->name('timeline-events.store');
+    Route::get('/timeline-events/{event}/edit', [AdminController::class, 'editTimelineEvent'])->name('timeline-events.edit');
+    Route::put('/timeline-events/{event}', [AdminController::class, 'updateTimelineEvent'])->name('timeline-events.update');
+    Route::delete('/timeline-events/{event}', [AdminController::class, 'deleteTimelineEvent'])->name('timeline-events.delete');
 });
 
 

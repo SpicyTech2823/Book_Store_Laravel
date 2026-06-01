@@ -11,6 +11,7 @@ use App\Models\FAQ;
 use App\Models\CompanyInfo;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\TimelineEvent;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -25,6 +26,7 @@ class AdminController extends Controller
             'total_orders' => Order::count(),
             'pending_orders' => Order::where('status', 'pending')->count(),
             'total_revenue' => Order::sum('total_price'),
+            'total_timeline_events' => TimelineEvent::count(),
         ];
 
         return view('admin.dashboard', $stats);
@@ -387,5 +389,56 @@ class AdminController extends Controller
     {
         $order->delete();
         return redirect()->route('admin.orders')->with('success', 'Order deleted successfully');
+    }
+
+    // Timeline Events CRUD
+    public function timelineEvents()
+    {
+        $events = TimelineEvent::orderBy('order')->get();
+        return view('admin.timeline-events.index', compact('events'));
+    }
+
+    public function createTimelineEvent()
+    {
+        return view('admin.timeline-events.create');
+    }
+
+    public function storeTimelineEvent(Request $request)
+    {
+        $validated = $request->validate([
+            'year' => 'required|numeric',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'icon' => 'nullable|string|max:255',
+            'order' => 'nullable|numeric',
+        ]);
+
+        TimelineEvent::create($validated);
+        return redirect()->route('admin.timeline-events')->with('success', 'Timeline event created successfully');
+    }
+
+    public function editTimelineEvent(TimelineEvent $event)
+    {
+        return view('admin.timeline-events.edit', compact('event'));
+    }
+
+    public function updateTimelineEvent(Request $request, TimelineEvent $event)
+    {
+        $validated = $request->validate([
+            'year' => 'required|numeric',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'icon' => 'nullable|string|max:255',
+            'order' => 'nullable|numeric',
+        ]);
+
+        $event->update($validated);
+        return redirect()->route('admin.timeline-events')->with('success', 'Timeline event updated successfully');
+    }
+
+    public function deleteTimelineEvent(TimelineEvent $event)
+    {
+        $event->delete();
+        return redirect()->route('admin.timeline-events')->with('success', 'Timeline event deleted successfully');
     }
 }
