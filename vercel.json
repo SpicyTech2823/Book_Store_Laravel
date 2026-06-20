@@ -1,14 +1,16 @@
 {
     "version": 2,
+  
     "functions": {
-      "api/lamda.php": {
+      "api/index.php": {
         "runtime": "vercel-php@0.7.3"
       }
     },
+  
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/api/lamda.php"
+        "dest": "/api/index.php"
       }
     ]
   }
