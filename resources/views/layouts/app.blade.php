@@ -59,6 +59,20 @@
 
 </div>
 </div>
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 mt-4">
+        @if(session('success'))
+            <div class="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 text-center">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="mb-4 bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded text-center">
+                {{ session('error') }}
+            </div>
+        @endif
+
+    </div>
     <div>
         @yield('content')
     </div>

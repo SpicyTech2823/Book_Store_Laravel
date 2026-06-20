@@ -7,7 +7,14 @@
     </div>
     <div class="flex flex-col md:flex-row gap-8">
         <div class="w-full md:w-1/3 bg-gradient-to-br from-rose-100 to-yellow-50 rounded-2xl p-5 flex items-center justify-center">
-            <img src="{{ asset('storage/' .  $book->cover_image) }}" alt="Book cover" class="h-96 w-auto object-contain drop-shadow-xl">
+            @if($book->cover_image && file_exists(public_path('storage/' . $book->cover_image)))
+                <img src="{{ asset('storage/' .  $book->cover_image) }}" alt="Book cover" class="h-96 w-auto object-contain drop-shadow-xl">
+            @else
+                <div class="text-center">
+                    <i class="fas fa-book text-gray-400 text-8xl mb-4"></i>
+                    <p class="text-gray-400">No cover image available</p>
+                </div>
+            @endif
         </div>
         <div class="w-full md:w-2/3">
             <h1 class="text-3xl font-bold mb-4">{{ $book->title }}</h1>

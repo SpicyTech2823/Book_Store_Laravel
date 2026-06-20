@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $book = Book::findOrFail($id);
         return view('books.show', compact('book'));

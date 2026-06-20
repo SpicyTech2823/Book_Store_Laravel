@@ -15,7 +15,14 @@
         @foreach($books as $book)
       <div class="book-card bg-white rounded-2xl shadow-md overflow-hidden transition-all border border-gray-100">
         <div class="relative h-72 bg-gradient-to-br from-rose-100 to-yellow-50 flex items-center justify-center">
-          <img src="{{ asset('storage/' . $book->cover_image) }}" alt="Book cover" class="h-64 w-auto object-contain drop-shadow-xl">
+          @if($book->cover_image && file_exists(public_path('storage/' . $book->cover_image)))
+            <img src="{{ asset('storage/' . $book->cover_image) }}" alt="Book cover" class="h-64 w-auto object-contain drop-shadow-xl">
+          @else
+            <div class="text-center">
+              <i class="fas fa-book text-gray-400 text-6xl mb-2"></i>
+              <p class="text-gray-400 text-sm">No cover image</p>
+            </div>
+          @endif
         </div>
         <div class="p-5">
           <div class="flex items-center text-yellow-400 text-sm mb-1">

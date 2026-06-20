@@ -34,7 +34,7 @@
         <div class="relative flex justify-center md:justify-end rounded-3xl overflow-hidden">
           <div class="relative w-80 h-80 md:w-96 md:h-96 bg-gradient-to-tr from-orange-200 to-amber-100 flex items-center justify-center shadow-2xl animate-pulse-slow ">
             <img src="{{ asset('images/cover.jpeg') }}" alt="Hero illustration" class="w-full h-full object-cover mix-blend-multiply opacity-90">
-            <div class="absolute -bottom-5 -right-5 bg-white p-3 rounded-full shadow-xl">
+            <div class="absolute -bottom-5 -right-5 bg-white p-6 rounded-full shadow-xl">
               <i class="fas fa-quote-right text-orange-500 text-2xl"></i>
             </div>
           </div>

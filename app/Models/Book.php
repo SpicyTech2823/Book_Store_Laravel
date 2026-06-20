@@ -16,6 +16,16 @@ class Book extends Model
         'star_rating',
     ];
 
+    // public function getCoverImageAttribute()
+    // {
+    //     return $this->attributes['cover_image'] ?? null;
+    // }
+
+    // public function setCoverImageAttribute($value)
+    // {
+    //     $this->attributes['cover_image'] = $value;
+    // }
+
     public function carts()
     {
         return $this->hasMany(Cart::class);
