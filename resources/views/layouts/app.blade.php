@@ -10,53 +10,130 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <div class="bg-gradient-to-r from-amber-50 via-orange-50 to-white text-black flex items-center justify-between p-4 shadow-md">
+<div class="bg-gradient-to-r from-amber-50 via-orange-50 to-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
 
-    <!-- Left Logo -->
-    <div class="w-1/3 flex items-center">
-        <a href="/" class="flex items-center space-x-2">
-            <i class="fas fa-book-open text-orange-500 text-2xl"></i>
-            <span class="font-bold text-xl">
-                Paper<span class="text-orange-500">bound</span>
-            </span>
-        </a>
-    </div>
-
-    <!-- Center Menu -->
-    <div class="w-1/3 flex justify-center gap-8 font-medium">
-        <a href="{{ route('home') }}">Home</a>
-        <a href="{{ route('shop') }}">Shop</a>
-        <a href="{{ route('about') }}">About</a>
-        <a href="{{ route('contact') }}">Contact</a>
-    </div>
-
-    <!-- Login and sign up -->
-    <div class="w-1/3 flex justify-end gap-4 items-center">
-        @auth
-            <span class="text-sm font-medium text-gray-700">Welcome, {{ Auth::user()->name }}</span>
-            @if(Auth::user()->isAdmin())
-                <a href="{{ route('admin.dashboard') }}" class="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 transition flex items-center gap-2">
-                    <i class="fas fa-tachometer-alt"></i> Admin
-                </a>
-            @endif
-            <form method="POST" action="{{ route('logout') }}" class="inline">
-                @csrf
-                <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600 transition">Logout</button>
-            </form>
-        @else
-            <a href="{{ route('login') }}" class="px-4 py-2 bg-orange-500 text-white rounded cursor-pointer hover:bg-orange-600 transition">Login</a>
-            <a href="{{ route('register') }}" class="px-4 py-2 border border-orange-500 text-orange-500 rounded cursor-pointer hover:bg-orange-600 hover:text-white transition">Sign Up</a>
-        @endauth
-        <!-- Cart -->
-        @auth
-            <a href="{{ route('cart.index') }}" class="relative text-gray-700 hover:text-gray-900 mt-3 ml-4">
-                <i class="fas fa-shopping-cart text-2xl text-orange-500 "></i>
-                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">{{ count(session()->get('cart', [])) }}</span>
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-2">
+                <i class="fas fa-book-open text-orange-500 text-2xl"></i>
+                <span class="font-bold text-xl">
+                    Paper<span class="text-orange-500">bound</span>
+                </span>
             </a>
-        @endauth
-    </div>
-     
 
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-8 font-medium">
+                <a href="{{ route('home') }}" class="hover:text-orange-500">Home</a>
+                <a href="{{ route('shop') }}" class="hover:text-orange-500">Shop</a>
+                <a href="{{ route('about') }}" class="hover:text-orange-500">About</a>
+                <a href="{{ route('contact') }}" class="hover:text-orange-500">Contact</a>
+            </div>
+
+            <!-- Desktop Right Side -->
+            <div class="hidden md:flex items-center gap-4">
+                @auth
+                    <span class="text-sm font-medium text-gray-700">
+                        Welcome, {{ Auth::user()->name }}
+                    </span>
+
+                    @if(Auth::user()->isAdmin())
+                        <a href="{{ route('admin.dashboard') }}"
+                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            Admin
+                        </a>
+                    @endif
+
+                    <a href="{{ route('cart.index') }}"
+                        class="relative text-orange-500">
+                        <i class="fas fa-shopping-cart text-2xl"></i>
+                        <span
+                            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
+                            {{ count(session()->get('cart', [])) }}
+                        </span>
+                    </a>
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                            Logout
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">
+                        Login
+                    </a>
+
+                    <a href="{{ route('register') }}"
+                        class="px-4 py-2 border border-orange-500 text-orange-500 rounded hover:bg-orange-600 hover:text-white">
+                        Sign Up
+                    </a>
+                @endauth
+            </div>
+
+            <!-- Mobile Burger Button -->
+            <button id="menuBtn" class="block md:hidden text-2xl text-orange-500">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden py-4 border-t">
+
+            <div class="flex flex-col gap-4 font-medium">
+                <a href="{{ route('home') }}">Home</a>
+                <a href="{{ route('shop') }}">Shop</a>
+                <a href="{{ route('about') }}">About</a>
+                <a href="{{ route('contact') }}">Contact</a>
+            </div>
+
+            <div class="mt-4 flex flex-col gap-3">
+                @auth
+                    <span class="text-sm text-gray-700">
+                        Welcome, {{ Auth::user()->name }}
+                    </span>
+
+                    @if(Auth::user()->isAdmin())
+                        <a href="{{ route('admin.dashboard') }}"
+                            class="bg-blue-500 text-white px-4 py-2 rounded text-center">
+                            Admin Dashboard
+                        </a>
+                    @endif
+
+                    <a href="{{ route('cart.index') }}"
+                        class="flex items-center gap-2">
+                        <i class="fas fa-shopping-cart text-orange-500"></i>
+                        Cart
+                        <span
+                            class="bg-red-500 text-white text-xs rounded-full px-2">
+                            {{ count(session()->get('cart', [])) }}
+                        </span>
+                    </a>
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="w-full bg-red-500 text-white py-2 rounded">
+                            Logout
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="bg-orange-500 text-white px-4 py-2 rounded text-center">
+                        Login
+                    </a>
+
+                    <a href="{{ route('register') }}"
+                        class="border border-orange-500 text-orange-500 px-4 py-2 rounded text-center">
+                        Sign Up
+                    </a>
+                @endauth
+            </div>
+
+        </div>
+    </div>
 </div>
 </div>
     <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 mt-4">
@@ -92,5 +169,13 @@
       <div class="border-t border-gray-800 mt-12 pt-6 text-center text-xs text-gray-500"><p>© 2025 Paperbound Books. Crafted for book lovers — all rights reserved.</p></div>
     </div>
   </footer>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>
 </body>
 </html>
