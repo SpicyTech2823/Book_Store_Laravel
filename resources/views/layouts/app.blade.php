@@ -131,7 +131,6 @@
                     </a>
                 @endauth
             </div>
-
         </div>
     </div>
 </div>
