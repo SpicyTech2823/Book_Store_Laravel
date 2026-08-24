@@ -21,7 +21,12 @@ echo "Configuring Nginx on port ${PORT}..."
 
 envsubst '${PORT}' \
     < /etc/nginx/sites-enabled/default.template \
-    > /etc/nginx/sites-enabled/default
+    > /etc/nginx/sites-enabled/rendered.conf
+
+rm -f /etc/nginx/sites-enabled/default.template
+
+mv /etc/nginx/sites-enabled/rendered.conf \
+   /etc/nginx/sites-enabled/default
 
 echo "Starting PHP-FPM..."
 
