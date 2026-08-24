@@ -1,16 +1,32 @@
 #!/bin/bash
-# Clear and rebuild caches
-php artisan config:clear
-php artisan cache:clear
+
+set -e
+
+echo "Starting Laravel..."
+
+php artisan optimize:clear
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
-# Run database migrations
+
+echo "Running migrations..."
+
 php artisan migrate --force
-# Seed admin user (first time only)
-php artisan db:seed --class=DatabaseSeeder --force
-# Fix permissions
+
+echo "Fixing permissions..."
+
 chmod -R 775 /var/www/storage /var/www/bootstrap/cache
-# Start services
+
+echo "Configuring Nginx on port ${PORT}..."
+
+envsubst '${PORT}' \
+    < /etc/nginx/sites-enabled/default.template \
+    > /etc/nginx/sites-enabled/default
+
+echo "Starting PHP-FPM..."
+
 php-fpm -D
-nginx -g "daemon off;"
+
+echo "Starting Nginx..."
+
+exec nginx -g "daemon off;"
