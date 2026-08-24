@@ -1,61 +1,20 @@
-FROM php:8.3-fpm
-
-# Install system dependencies
+FROM php:8.2-fpm
 RUN apt-get update && apt-get install -y \
-    nginx \
-    git \
-    curl \
-    unzip \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libonig-dev \
-    libxml2-dev \
-    libzip-dev \
-    zip \
-    nodejs \
-    npm \
-    default-mysql-client \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-        pdo_mysql \
-        mbstring \
-        exif \
-        pcntl \
-        bcmath \
-        gd \
-        zip \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-WORKDIR /var/www/html
-
-# Copy Laravel application
+git curl libpng-dev libonig-dev \
+libxml2-dev libpq-dev zip unzip nginx
+RUN docker-php-ext-install pdo pdo_pgsql pgsql mbstring exif pcntl bcmath gd
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+WORKDIR /var/www
 COPY . .
-
-# Install PHP dependencies
-RUN composer install \
-    --no-dev \
-    --optimize-autoloader \
-    --no-interaction
-
-# Install frontend dependencies and build assets
-RUN npm install
-RUN npm run build
-
-# Laravel permissions
-RUN chown -R www-data:www-data /var/www/html/storage \
-    /var/www/html/bootstrap/cache
-
-# Nginx configuration
-COPY docker/nginx.conf /etc/nginx/sites-available/default
-
-# Startup script
-COPY docker/start.sh /start.sh
-RUN chmod +x /start.sh
-
+RUN composer install --no-dev --optimize-autoloader
+RUN mkdir -p storage/framework/sessions \
+storage/framework/views \
+storage/framework/cache \
+storage/logs bootstrap/cache
+RUN chown -R www-data:www-data /var/www
+RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+COPY nginx.conf /etc/nginx/sites-enabled/default
 EXPOSE 10000
-
-CMD ["/start.sh"]
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+CMD ["/start.sh"]py
