@@ -19,8 +19,10 @@ WORKDIR /var/www
 # Copy existing application directory contents
 COPY . /var/www
 
-# Install dependencies
-RUN composer install --no-interaction --optimize-autoloader --no-dev
+# Install dependencies and ensure runtime permissions
+RUN composer install --no-interaction --optimize-autoloader --no-dev \
+    && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
+    && chmod +x ./deploy.sh
 
 # Setup Nginx configuration
 COPY ./nginx.conf /etc/nginx/sites-available/default
