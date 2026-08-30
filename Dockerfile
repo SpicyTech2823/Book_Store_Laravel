@@ -1,30 +1,65 @@
-FROM php:8.2-fpm
+# PHP + Apache
+FROM php:8.2-apache
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    git curl libpng-dev libonig-dev libxml2-dev libpq-dev zip unzip nginx \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    git \
+    unzip \
+    curl \
+    libzip-dev \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    && docker-php-ext-install \
+    pdo_mysql \
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    gd \
+    zip
 
-# Install PHP extensions (including Postgres PDO)
-RUN docker-php-ext-install pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd
+# Enable Apache rewrite
+RUN a2enmod rewrite
 
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Set working directory
-WORKDIR /var/www
+# Install Node.js and npm
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs
 
-# Copy existing application directory contents
-COPY . /var/www
+# Set Laravel working directory
+WORKDIR /var/www/html
 
-# Install dependencies and ensure runtime permissions
-RUN composer install --no-interaction --optimize-autoloader --no-dev \
-    && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
-    && chmod +x ./deploy.sh
+# Copy project
+COPY . .
 
-# Setup Nginx configuration
-COPY ./nginx.conf /etc/nginx/sites-available/default
+# Install PHP dependencies
+RUN composer install \
+    --no-dev \
+    --optimize-autoloader \
+    --no-interaction
 
-# Expose port and start entrypoint
+# Install Node dependencies and build Vite
+RUN npm install
+RUN npm run build
+
+# Configure Apache to use Laravel's public directory
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
+    /etc/apache2/sites-available/*.conf \
+    /etc/apache2/apache2.conf \
+    /etc/apache2/conf-available/*.conf
+
+# Set permissions
+RUN chown -R www-data:www-data \
+    /var/www/html/storage \
+    /var/www/html/bootstrap/cache
+
+# Expose Apache
 EXPOSE 80
-CMD ["sh", "./deploy.sh"]
+
+# Start Apache
+CMD ["apache2-foreground"]
