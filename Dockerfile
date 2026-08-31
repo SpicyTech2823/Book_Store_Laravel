@@ -58,8 +58,14 @@ RUN chown -R www-data:www-data \
     /var/www/html/storage \
     /var/www/html/bootstrap/cache
 
-# Expose Apache
-EXPOSE 80
-
-# Start Apache
-CMD ["apache2-foreground"]
+    # Copy startup script
+    COPY start.sh /usr/local/bin/start.sh
+    
+    # Make startup script executable
+    RUN chmod +x /usr/local/bin/start.sh
+    
+    # Expose Apache
+    EXPOSE 80
+    
+    # Start Laravel
+    CMD ["/usr/local/bin/start.sh"]
